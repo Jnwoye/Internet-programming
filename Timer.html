@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Countdown Timer</title>
+  <style>
+    /* Styling for the countdown timer */
+    .countdown {
+      font-size: 36px;
+      text-align: center;
+    }
+
+    /* Styling for the input field and start button */
+    input[type="number"] {
+      width: 100px;
+      padding: 10px;
+    }
+
+    .start-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Custom Countdown Timer</h1>
+  <div class="countdown" id="timer">00:00</div>
+  <input type="number" id="minutes" placeholder="Minutes">
+  <input type="number" id="seconds" placeholder="Seconds">
+  <button class="start-button" onclick="startCountdown()">Start Countdown</button>
+
+  <script>
+    let intervalId; // Variable to store the interval ID
+
+    // Function to start the countdown
+    function startCountdown() {
+      const timer = document.getElementById("timer");
+      const minutes = parseInt(document.getElementById("minutes").value) || 0;
+      const seconds = parseInt(document.getElementById("seconds").value) || 0;
+      let totalSeconds = minutes * 60 + seconds;
+
+      intervalId = setInterval(function() {
+        const minutes = Math.floor(totalSeconds / 60);
+        const remainingSeconds = totalSeconds % 60;
+
+        // Display the time in MM:SS format
+        timer.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+
+        // Check if the countdown is complete
+        if (totalSeconds <= 0) {
+          clearInterval(intervalId);
+          timer.textContent = 'Time\'s up!';
+        } else {
+          totalSeconds--;
+        }
+      }, 1000); // Update the timer every second
+    }
+  </script>
+</body>
+</html>

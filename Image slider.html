@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Slider</title>
+  <style>
+    /* Styling for the image container */
+    .slider-container {
+      width: 400px;
+      height: 300px;
+      overflow: hidden; /* Hide overflow for a fixed size */
+      position: relative;
+    }
+
+    /* Styling for the images */
+    .slider-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure images cover the container */
+      transition: transform 0.5s ease; /* Smooth transition for sliding */
+    }
+
+    /* Styling for the navigation buttons */
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .prev-button {
+      left: 10px;
+    }
+
+    .next-button {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Slider</h1>
+  <div class="slider-container">
+    <!-- Images for the slider -->
+    <img class="slider-image" src="image1.jpg" alt="Image 1">
+    <img class="slider-image" src="image2.jpg" alt="Image 2">
+    <img class="slider-image" src="image3.jpg" alt="Image 3">
+  </div>
+  <button class="slider-button prev-button" onclick="prevSlide()">&#10094; Previous</button>
+  <button class="slider-button next-button" onclick="nextSlide()">Next &#10095;</button>
+
+  <script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.slider-image');
+
+    // Function to show the next image in the slider
+    function nextSlide() {
+      images[currentIndex].style.transform = 'translateX(-100%)';
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].style.transform = 'translateX(0)';
+    }
+
+    // Function to show the previous image in the slider
+    function prevSlide() {
+      images[currentIndex].style.transform = 'translateX(100%)';
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      images[currentIndex].style.transform = 'translateX(0)';
+    }
+  </script>
+</body>
+</html>
